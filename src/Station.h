@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "util/util.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -15,13 +15,16 @@ private:
     double amountCollected;
     double discountOffered;
     unordered_map <PassengerCategory, int> passengerCount;
+    static unordered_map<StationId, Station*> stationInstances;
 public:
     Station(StationId stationId);
     ~Station();
+    unordered_map <PassengerCategory, int> getPassengerCount();
     void updateAmountCollected(double amount);
     void updateDiscountOffered(double amount);
     void updatePassangerCount(PassengerCategory passangerCategory);
     void printSummary();
+    static Station* getInstance(StationId stationId);
 };
 
 #endif
