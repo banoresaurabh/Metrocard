@@ -9,4 +9,5 @@ string getStationNameStringFromEnum(StationId stationId);
 StationId getStationNameEnumFromString(string stationId);
 string getPassengerTypeStringFromEnum(PassengerCategory passengerCategory);
 PassengerCategory getPassengerTypeEnumFromString(string passengerCategory);
+
 #endif

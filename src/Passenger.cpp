@@ -1,10 +1,10 @@
 #include <iostream>
 #include <unordered_map>
 
-#include "Passenger.h"
-#include "MetroCard.h"
-#include "Station.h"
 #include "constants.h"
+#include "MetroCard.h"
+#include "Passenger.h"
+#include "Station.h"
 
 using namespace std;
 
@@ -39,7 +39,7 @@ double Passenger::getJournyCharge(double ticketRate, double discount) {
     if (balance < (requiredAmount)) {
         double refillAmount = requiredAmount - balance;
         this->metroCard->setBalance(requiredAmount); 
-        totalCharge += refillAmount * (SERVICE_FEE_PERCENT / 100);
+        totalCharge += refillAmount * (Station::getServiceFeePercent() / 100);
     }
 
     // TODO: make it atomic
@@ -52,7 +52,7 @@ double Passenger::getJournyCharge(double ticketRate, double discount) {
 double Passenger::getJournyDiscount(double ticketRate) {
     double totalDiscount = 0;
     if (!this->returnDiscount) return totalDiscount;
-    totalDiscount = ticketRate * (RETURN_DISCOUNT_PERCENT / 100);
+    totalDiscount = ticketRate * (Station::getReturnDiscountPercent() / 100);
     return totalDiscount;
 }
 

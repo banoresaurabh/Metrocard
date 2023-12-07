@@ -2,8 +2,8 @@
 #include <string>
 #include <unordered_map>
 
-#include "Station.h"
 #include "constants.h"
+#include "Station.h"
 #include "util.h"
 
 using namespace std;
@@ -11,6 +11,7 @@ using namespace std;
 unordered_map<StationId, Station*> Station::stationInstances;
 vector<pair<int, PassengerCategory>> getSortedPassengerCount(Station* station);
 bool passengerCountComparator(pair<int, PassengerCategory> &a, pair<int, PassengerCategory> &b);
+
 
 Station::Station(StationId stationId)
 {
@@ -24,14 +25,20 @@ unordered_map <PassengerCategory, int> Station::getPassengerCount() {
     return this->passengerCount;
 }
 
+double Station::getServiceFeePercent() {
+    return Station::SERVICE_FEE_PERCENT;
+}
+
+double Station::getReturnDiscountPercent() {
+    return Station::RETURN_DISCOUNT_PERCENT;
+}
+
 void Station::updateAmountCollected(double amount) {
     this->amountCollected += amount;
-    // cout<<" Updating amount "<<this->amountCollected<<" for "<<getStationNameStringFromEnum(this->stationId)<<endl;
 }
 
 void Station::updateDiscountOffered(double discountOffered) {
     this->discountOffered += discountOffered;
-    // cout<<" Updating discount "<<this->discountOffered<<endl;
 }
 
 void Station::updatePassangerCount(PassengerCategory passangerCategory) {
@@ -71,5 +78,5 @@ vector<pair<int, PassengerCategory>> getSortedPassengerCount(Station* station) {
 }
 
 bool passengerCountComparator(pair<int, PassengerCategory> &a, pair<int, PassengerCategory> &b) {
-    return a.first > b.first || (a.first == b.first && a.second < b.second);
+    return (a.first > b.first) || (a.first == b.first && a.second < b.second);
 }

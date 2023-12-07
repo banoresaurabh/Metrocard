@@ -9,18 +9,26 @@
 
 using namespace std;
 
-int main() {
-    ifstream input("../input/input.txt");
+int main(int argc, char *argv[]) {
+    if (argc < 2){
+        cout<<"No path found for input file"<<endl;
+        return 1;
+    } 
+    string input_file = argv[1];
+    ifstream input(input_file);
 
-    string command = "";
+    string command;
     while (input >> command){
+
         if (command == "BALANCE") {
             string balance, metroCardId;
+
             input >> metroCardId >> balance;
             MetroCard* metroCard = MetroCard::getInstance(metroCardId);
             metroCard->setBalance(stod(balance));
         } else if (command == "CHECK_IN") {
-            string passengerCategory = "", fromStation = "", metroCardId = "";
+            string passengerCategory, fromStation, metroCardId;
+
             input >> metroCardId >> passengerCategory >> fromStation;
             Passenger* passenger = Passenger::getInstance(metroCardId, 
                                     getPassengerTypeEnumFromString(passengerCategory));
@@ -29,12 +37,9 @@ int main() {
         } else if (command == "PRINT_SUMMARY") {
             Station* central = Station::getInstance(CENTRAL);
             Station* airport = Station::getInstance(AIRPORT);
-            if (central != nullptr) {
-                central->printSummary();
-            }
-            if (airport != nullptr) {
-                airport->printSummary();
-            }
+
+            central->printSummary();
+            airport->printSummary();
         } 
     }
     return 0;

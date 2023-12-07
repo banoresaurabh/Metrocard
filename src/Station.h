@@ -15,16 +15,23 @@ private:
     double amountCollected;
     double discountOffered;
     unordered_map <PassengerCategory, int> passengerCount;
+
     static unordered_map<StationId, Station*> stationInstances;
+    constexpr static double SERVICE_FEE_PERCENT = 2;
+    constexpr static double RETURN_DISCOUNT_PERCENT = 50;
 public:
     Station(StationId stationId);
     ~Station();
     unordered_map <PassengerCategory, int> getPassengerCount();
+    static Station* getInstance(StationId stationId);
+    static double getServiceFeePercent();
+    static double getReturnDiscountPercent();
+    
     void updateAmountCollected(double amount);
     void updateDiscountOffered(double amount);
     void updatePassangerCount(PassengerCategory passangerCategory);
     void printSummary();
-    static Station* getInstance(StationId stationId);
+    
 };
 
 #endif
