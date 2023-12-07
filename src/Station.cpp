@@ -60,7 +60,6 @@ void Station::printSummary() {
     vector<pair<int, PassengerCategory>> countStorage = getSortedPassengerCount(this);
     cout<<"PASSENGER_TYPE_SUMMARY"<<endl;
     for (auto pCount : countStorage) {
-        PassengerCategory category = static_cast<PassengerCategory>(pCount.second);
         if (pCount.first)
                 cout<<getPassengerTypeStringFromEnum(pCount.second)<<" "<<pCount.first<<endl;
     }

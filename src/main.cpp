@@ -19,7 +19,6 @@ int main(int argc, char *argv[]) {
 
     string command;
     while (input >> command){
-
         if (command == "BALANCE") {
             string balance, metroCardId;
 
