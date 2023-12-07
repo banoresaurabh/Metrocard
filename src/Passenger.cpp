@@ -39,7 +39,7 @@ double Passenger::getJournyCharge(double ticketRate, double discount) {
     if (balance < (requiredAmount)) {
         double refillAmount = requiredAmount - balance;
         this->metroCard->setBalance(requiredAmount); 
-        totalCharge += refillAmount * (Station::getServiceFeePercent() / 100);
+        totalCharge += refillAmount * (Station::getServiceFeePercent());
     }
 
     // TODO: make it atomic
@@ -52,7 +52,7 @@ double Passenger::getJournyCharge(double ticketRate, double discount) {
 double Passenger::getJournyDiscount(double ticketRate) {
     double totalDiscount = 0;
     if (!this->returnDiscount) return totalDiscount;
-    totalDiscount = ticketRate * (Station::getReturnDiscountPercent() / 100);
+    totalDiscount = ticketRate * (Station::getReturnDiscountPercent());
     return totalDiscount;
 }
 

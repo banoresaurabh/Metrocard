@@ -17,8 +17,8 @@ private:
     unordered_map <PassengerCategory, int> passengerCount;
 
     static unordered_map<StationId, Station*> stationInstances;
-    constexpr static double SERVICE_FEE_PERCENT = 2;
-    constexpr static double RETURN_DISCOUNT_PERCENT = 50;
+    constexpr static double SERVICE_FEE_PERCENT = 0.02;
+    constexpr static double RETURN_DISCOUNT_PERCENT = 0.50;
 public:
     Station(StationId stationId);
     ~Station();
