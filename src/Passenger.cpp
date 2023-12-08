@@ -57,11 +57,10 @@ double Passenger::getJournyDiscount(double ticketRate) {
 }
 
 Passenger* Passenger::getInstance(string metroCardId, PassengerCategory passengerCategory) {
-    if (passengerInstances.find(metroCardId) != passengerInstances.end()) {
-        return passengerInstances[metroCardId];
+    if (passengerInstances.find(metroCardId) == passengerInstances.end()) {
+        Passenger* passengerInstance = new Passenger(passengerCategory, metroCardId);
+        passengerInstances[metroCardId] = passengerInstance;
     }
-    Passenger* passengerInstance = new Passenger(passengerCategory, metroCardId);
-    passengerInstances[metroCardId] = passengerInstance;
     return passengerInstances[metroCardId];
 }
 

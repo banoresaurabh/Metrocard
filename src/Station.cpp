@@ -46,11 +46,10 @@ void Station::updatePassangerCount(PassengerCategory passangerCategory) {
 }
 
 Station* Station::getInstance(StationId stationId) {
-    if (Station::stationInstances.find(stationId) != Station::stationInstances.end()) {
-        return Station::stationInstances[stationId];
+    if (Station::stationInstances.find(stationId) == Station::stationInstances.end()) {
+        Station* stationInstance = new Station(stationId);
+        Station::stationInstances[stationId] = stationInstance;
     }
-    Station* stationInstance = new Station(stationId);
-    Station::stationInstances[stationId] = stationInstance;
     return Station::stationInstances[stationId];
 }
 

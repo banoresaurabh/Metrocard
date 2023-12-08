@@ -17,8 +17,13 @@ int main(int argc, char *argv[]) {
     string input_file = argv[1];
     ifstream input(input_file);
 
+    if (!input.is_open()) {
+        cout<<"Error opening file"<<endl;
+        return 1;
+    }
+
     string command;
-    while (input >> command){
+    while (input >> command) {
         if (command == "BALANCE") {
             string balance, metroCardId;
 
@@ -41,5 +46,7 @@ int main(int argc, char *argv[]) {
             airport->printSummary();
         } 
     }
+
+    input.close();
     return 0;
 }

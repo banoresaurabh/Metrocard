@@ -25,10 +25,9 @@ void MetroCard::setBalance(double balance) {
 }
 
 MetroCard* MetroCard::getInstance(string id) {
-    if (metroCardInstances.find(id) != metroCardInstances.end()) {
-        return metroCardInstances[id];
+    if (metroCardInstances.find(id) == metroCardInstances.end()) {
+        MetroCard* metroCardInstance = new MetroCard(id);
+        metroCardInstances[id] = metroCardInstance;
     }
-    MetroCard* metroCardInstance = new MetroCard(id);
-    metroCardInstances[id] = metroCardInstance;
     return metroCardInstances[id];
 }
