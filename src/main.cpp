@@ -1,52 +1,33 @@
 #include <fstream>
+#include <sstream>
 #include <iostream>
 
-#include "constants.h"
-#include "MetroCard.h"
-#include "Passenger.h"
-#include "Station.h"
-#include "util.h"
-
-using namespace std;
+#include "command/CommandFactory.h"
 
 int main(int argc, char *argv[]) {
-    if (argc < 2){
-        cout<<"No path found for input file"<<endl;
-        return 1;
-    } 
-    string input_file = argv[1];
-    ifstream input(input_file);
+     if (argc < 2){
+         std::cout << "No path found for input file" << std::endl;
+         return 1;
+     }
+     std::string input_file = argv[1];
+     std::ifstream input(input_file);
+     if (!input.is_open()) {
+         std::cout << "Error opening file" << std::endl;
+         return 1;
+     }
 
-    if (!input.is_open()) {
-        cout<<"Error opening file"<<endl;
-        return 1;
-    }
+     std::string line;
+     while(std::getline(input, line)) {
+        std::stringstream streamLine(line);
+        ICommand* command = CommandFactory::createCommand(streamLine);
+        if (command) {
+            command->execute();
+            delete command;
+        } else {
+            std::cout << "Invalid ICommand" << std::endl;
+        }
+     }
 
-    string command;
-    while (input >> command) {
-        if (command == "BALANCE") {
-            string balance, metroCardId;
-
-            input >> metroCardId >> balance;
-            MetroCard* metroCard = MetroCard::getInstance(metroCardId);
-            metroCard->setBalance(stod(balance));
-        } else if (command == "CHECK_IN") {
-            string passengerCategory, fromStation, metroCardId;
-
-            input >> metroCardId >> passengerCategory >> fromStation;
-            Passenger* passenger = Passenger::getInstance(metroCardId, 
-                                    getPassengerTypeEnumFromString(passengerCategory));
-            passenger->checkIn(metroCardId, getPassengerTypeEnumFromString(passengerCategory),
-                                    getStationNameEnumFromString(fromStation));
-        } else if (command == "PRINT_SUMMARY") {
-            Station* central = Station::getInstance(CENTRAL);
-            Station* airport = Station::getInstance(AIRPORT);
-
-            central->printSummary();
-            airport->printSummary();
-        } 
-    }
-
-    input.close();
-    return 0;
+     input.close();
+     return 0;
 }

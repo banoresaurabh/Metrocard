@@ -3,11 +3,10 @@
 
 #include "MetroCard.h"
 
-using namespace std;
 
-unordered_map<string, MetroCard*> MetroCard:: metroCardInstances;
+std::unordered_map<std::string, MetroCard*> MetroCard:: metroCardInstances;
 
-MetroCard::MetroCard(string id) {
+MetroCard::MetroCard(std::string id) {
     this->id = id;
     this->balance = 0;
 }
@@ -24,7 +23,7 @@ void MetroCard::setBalance(double balance) {
     this->balance = balance;
 }
 
-MetroCard* MetroCard::getInstance(string id) {
+MetroCard* MetroCard::getInstance(std::string id) {
     if (metroCardInstances.find(id) == metroCardInstances.end()) {
         MetroCard* metroCardInstance = new MetroCard(id);
         metroCardInstances[id] = metroCardInstance;

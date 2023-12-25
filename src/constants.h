@@ -5,23 +5,21 @@
 #include <unordered_map>
 #include <vector>
 
-using namespace std;
-
-const enum PassengerCategory {
+const enum class PassengerCategory {
     ADULT,
     KID,
     SENIOR_CITIZEN
 };
 
-const enum StationId {
+const enum class StationId {
     AIRPORT,
     CENTRAL
 };
 
-const unordered_map<int, double> RATES({
-    {ADULT, 200.0},
-    {KID, 50.0},
-    {SENIOR_CITIZEN, 100.0}
+const std::unordered_map<PassengerCategory, double> RATES({
+    {PassengerCategory::ADULT, 200.0},
+    {PassengerCategory::KID, 50.0},
+    {PassengerCategory::SENIOR_CITIZEN, 100.0}
 });
 
 #endif

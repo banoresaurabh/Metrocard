@@ -3,21 +3,19 @@
 
 #include <string>
 
-using namespace std;
-
 class MetroCard
 {
 private:
-    string id;
+    std::string id;
     double balance;
 
-    static unordered_map<string, MetroCard*> metroCardInstances;
+    static std::unordered_map<std::string, MetroCard*> metroCardInstances;
 public:
-    MetroCard(string id);
+    MetroCard(std::string id);
     ~MetroCard();
 
     double getBalance();
     void setBalance(double balance);
-    static MetroCard* getInstance(string id);
+    static MetroCard* getInstance(std::string id);
 };
 #endif
